@@ -4,6 +4,7 @@
 
 <script>
 import * as d3 from 'd3'
+import csvURL from '../assets/data/food.csv'
 
 export default {
   name: 'HelloD3',
@@ -14,6 +15,8 @@ export default {
       .append('h3')
       .append('text')
       .text(`D3 version: ${d3.version}`)
+    d3.csv(csvURL)
+      .then((data) => console.log(data))
   }
 }
 </script>
