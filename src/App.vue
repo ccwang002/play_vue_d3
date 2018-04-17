@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <HelloD3></HelloD3>
     <!-- <img src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"></HelloWorld> -->
@@ -20,12 +20,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "scss/custom";
+@import "~bootstrap/scss/bootstrap";
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: gray("750");
+  padding: 60px 0;
 }
 </style>
