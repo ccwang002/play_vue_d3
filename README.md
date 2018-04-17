@@ -2,9 +2,12 @@
 Boilerplate by [vue-cli] version 3.0.0-beta.6, which is based on webpack version 3.10.0.
 Webpack 4 will be used in future (there is a `webpack4` WIP branch).
 
+The javascript is written in ES2015 and follows [JavaScript Standard Style]. Use SCSS for styling.
+
 Use D3.js version 5.
 
 [vue-cli]: https://github.com/vuejs/vue-cli
+[JavaScript Standard Style]: https://standardjs.com/ 
 
 ### Usage
 Clone the repo and run yarn:
