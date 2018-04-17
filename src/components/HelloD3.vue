@@ -3,6 +3,7 @@
     <h3></h3>
     <h4>Loaded data:</h4>
     <ul></ul>
+    <svg></svg>
   </div>
 </template>
 
@@ -24,14 +25,40 @@ export default {
   },
   methods: {
     drawD3: function () {
+      const vm = this.$el
+      const svg = d3.select(vm).select('svg')
       this.d3data.then(function (dataset) {
         d3
-          .select('.d3-root ul')
+          .select(vm)
+          .select('ul')
           .selectAll('li')
           .data(dataset)
           .enter()
           .append('li')
           .text((d) => `${d.Food} (${d.Deliciousness})`)
+
+        // Add shapes
+        svg
+          .selectAll('circle')
+          .data(dataset)
+          .enter()
+          .append('circle')
+          .attr('cx', function (d, i) {
+            return (i * 50) + 25
+          })
+          .attr('cy', 50)
+          .attr('r', d => d.Deliciousness * 2)
+          .classed('circle', true)
+
+        // Add label
+        svg
+          .selectAll('text')
+          .data(dataset)
+          .enter()
+          .append('text')
+          .text((d) => d.Food)
+          .attr('x', (d, i) => (i * 50) + 25)
+          .attr('y', (d, i) => i % 2 === 0 ? 20 : 90)
       })
     }
   },
@@ -46,16 +73,32 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .d3-root {
   text-align: left;
   display: flex;
   flex-direction: column;
 
-  ul, h4, h3 {
+  ul, h4, h3, svg {
     align-self: center;
     text-align: left;
     max-width: 30rem;
+  }
+
+  svg {
+    height: 100px;
+    width: 300px;
+
+    text {
+      font-size: 0.75em;
+      text-anchor: middle;
+    }
+
+    circle.circle {
+      stroke: blueviolet;
+      stroke-width: 2px;
+      fill: black;
+    }
   }
 }
 </style>
