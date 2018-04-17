@@ -1,5 +1,5 @@
 <template>
-  <div class="d3-root">
+  <div class="hello-d3">
     <h3></h3>
     <h4>Loaded data:</h4>
     <ul></ul>
@@ -63,9 +63,9 @@ export default {
     }
   },
   mounted () {
+    const vm = this.$el
     d3
-      .select('.d3-root h3')
-      .append('h3')
+      .select(vm).select('h3')
       .append('text')
       .text(`D3 version: ${d3.version}`)
     this.drawD3()
@@ -74,10 +74,11 @@ export default {
 </script>
 
 <style lang="scss">
-.d3-root {
+.hello-d3 {
   text-align: left;
   display: flex;
   flex-direction: column;
+  margin-bottom: 5em;
 
   ul, h4, h3, svg {
     align-self: center;
