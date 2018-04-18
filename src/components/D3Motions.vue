@@ -25,8 +25,7 @@ export default {
       this.yScale = d3.scaleLinear()
         .domain([0, d3.max(this.dataset)])
         .range([this.h - this.padding.y, this.padding.y])
-      this.yAxis = d3.axisLeft(this.yScale)
-        .ticks(5)
+      this.yAxis = d3.axisLeft(this.yScale).ticks(5)
     },
     initialPlot: function () {
       const svg = d3.select(this.$el).select('svg')
@@ -69,20 +68,29 @@ export default {
         .transition()
         .delay((d, i) => i / this.dataset.length * delay)
         .duration(duration)
-      // .ease(d3.easeCubicInOut)
+        // .ease(d3.easeCubicInOut)
         .attr('y', d => this.yScale(d))
         .attr('height', d => this.h - this.padding.y - this.yScale(d))
         .attr('fill', d => `rgb(0, 0, ${Math.round(d * 10)})`)
 
+      let valTooLow = d => d <= Math.round(d3.max(this.dataset) * 0.05)
+
       // Update all labels
       svg.selectAll('text')
         .data(this.dataset)
+        .classed('inverted', valTooLow)
         .transition()
         .delay((d, i) => i / this.dataset.length * delay)
         .duration(duration)
         .text(d => d)
         .attr('x', (d, i) => this.xScale(i) + this.xScale.bandwidth() / 2)
-        .attr('y', (d, i) => this.yScale(d) + this.padding.label)
+        .attr('y', (d, i) => {
+          if (valTooLow(d)) {
+            return this.yScale(d) - 3
+          } else {
+            return this.yScale(d) + this.padding.label
+          }
+        })
 
       // Update y axis
       svg.select('g.axis').call(this.yAxis)
@@ -125,6 +133,9 @@ export default {
     text-anchor: middle;
     fill: white;
     font-size: 0.5em;
+  }
+  .label.inverted {
+    fill: black;
   }
 }
 </style>
