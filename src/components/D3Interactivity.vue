@@ -1,6 +1,14 @@
 <template>
   <div class="d3-interactivity">
     <h3>D3 interactivity</h3>
+    <p>
+      Tooltip position:
+      <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">
+          {{ option.text }}
+        </option>
+      </select>
+    </p>
     <svg></svg>
     <div class="d3-tooltip hidden">
       <p><strong>Tooltip Heading</strong></p>
@@ -14,6 +22,15 @@ import * as d3 from 'd3'
 
 export default {
   name: 'D3Interactivity',
+  data: function () {
+    return {
+      'selected': 'fixed-x',
+      'options': [
+        {text: 'Fixed X position', value: 'fixed-x'},
+        {text: 'Floated', value: 'floated'}
+      ]
+    }
+  },
   methods: {
     initializePlot: function () {
       this.xScale = d3.scaleBand()
@@ -46,21 +63,22 @@ export default {
       const tooltip = d3.select(vm.$el).select('.d3-tooltip')
       bars
         .on('mouseenter', function (d) {
-          let xPosition = d3.event.pageX
-          let yPosition = d3.event.pageY
           tooltip
-            .style('left', xPosition + 'px')
-            .style('top', yPosition + 'px')
             .select('.value')
             .text(d)
           tooltip.classed('hidden', false)
         })
         .on('mousemove', function (d) {
-          let xPosition = d3.event.pageX
-          let yPosition = d3.event.pageY
+          const mousePagePos = {x: d3.event.pageX, y: d3.event.pageY}
+          let tooltipPagePos = mousePagePos
+          if (vm.selected === 'fixed-x') {
+            // The tooltip will always in the middle of the bar
+            let barPageRect = this.getBoundingClientRect()
+            tooltipPagePos.x = barPageRect.left + barPageRect.width / 2
+          }
           tooltip
-            .style('left', xPosition + 'px')
-            .style('top', yPosition + 'px')
+            .style('left', tooltipPagePos.x + 'px')
+            .style('top', tooltipPagePos.y + 'px')
         })
         .on('mouseout', function (d) {
           tooltip.classed('hidden', true)
