@@ -71,6 +71,9 @@ export default {
 </script>
 
 <style lang="scss">
+.d3-scales {
+  margin-bottom: 5em;
+}
 .d3-scales svg {
   .label {
     fill: purple;
