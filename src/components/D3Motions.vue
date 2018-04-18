@@ -30,8 +30,20 @@ export default {
     initialPlot: function () {
       const svg = d3.select(this.$el).select('svg')
 
+      // Create clipping path
+      svg.append('clipPath')
+        .attr('id', 'chart-area')
+        .append('rect')
+        .attr('x', this.padding.x)
+        .attr('y', this.padding.y)
+        .attr('width', this.w - this.padding.x)
+        .attr('height', this.h - this.padding.y)
+
       // Plot bars
-      svg.selectAll('rect')
+      svg.append('g')
+        .attr('id', 'rects')
+        .attr('clip-path', 'url(#chart-area)')
+        .selectAll('rect')
         .data(this.dataset)
         .enter()
         .append('rect')
@@ -63,7 +75,8 @@ export default {
       const svg = d3.select(this.$el).select('svg')
 
       // Update all rects
-      svg.selectAll('rect')
+      svg.select('g#rects')
+        .selectAll('rect')
         .data(this.dataset)
         .transition()
         .delay((d, i) => i / this.dataset.length * delay)
@@ -93,7 +106,10 @@ export default {
         })
 
       // Update y axis
-      svg.select('g.axis').call(this.yAxis)
+      svg.select('g.axis')
+        .transition()
+        .duration(duration)
+        .call(this.yAxis)
     }
   },
   mounted: function () {
