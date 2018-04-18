@@ -144,6 +144,9 @@ export default {
 </script>
 
 <style lang="scss">
+.d3-motions {
+  margin-bottom: 3em;
+}
 .d3-motions svg {
   .label {
     text-anchor: middle;
