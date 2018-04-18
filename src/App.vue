@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container">
     <HelloD3 :csvURL='csvURL'></HelloD3>
-    <D3Scales :dataset='scalesDataset'></D3Scales>
+    <D3ScalesAxes :dataset='scalesDataset'></D3ScalesAxes>
     <!-- <img src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"></HelloWorld> -->
   </div>
@@ -10,7 +10,7 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import HelloD3 from './components/HelloD3.vue'
-import D3Scales from './components/D3Scales.vue'
+import D3ScalesAxes from './components/D3ScalesAxes.vue'
 import csvURL from './assets/data/food.csv'
 
 const scalesDataset = [
@@ -23,7 +23,7 @@ export default {
   components: {
     HelloWorld,
     HelloD3,
-    D3Scales
+    D3ScalesAxes
   },
   data: function () {
     return {
