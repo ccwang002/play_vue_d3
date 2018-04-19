@@ -90,7 +90,11 @@ export default {
 
       // Draw line plot
       let line = d3.line()
-        .defined(d => d.average >= 0) // Remove invalid measurements
+        .defined(d => d.average >= 0 && d.average <= 350)
+        .x(d => this.xScale(d.date))
+        .y(d => this.yScale(d.average))
+      let dangerLine = d3.line()
+        .defined(d => d.average > 350)
         .x(d => this.xScale(d.date))
         .y(d => this.yScale(d.average))
       svg
@@ -98,6 +102,11 @@ export default {
         .datum(dataset)
         .attr('class', 'line')
         .attr('d', line)
+      svg
+        .append('path')
+        .datum(dataset)
+        .attr('class', 'line danger')
+        .attr('d', dangerLine)
 
       // Draw 350 ppm line
       // Note that axis is by default shifted 0.5px right and downwards
@@ -108,6 +117,13 @@ export default {
         .attr('x2', this.w - this.padding.x)
         .attr('y1', this.yScale(350))
         .attr('y2', this.yScale(350))
+      
+      // Label 350ppm line
+      svg.append('text')
+        .attr('class', 'safeLevel label')
+        .attr('x', this.padding.x + 5)
+        .attr('y', this.yScale(350) - 5)
+        .text('350 ppm “safe” level')
     }
   }
 }
@@ -132,6 +148,14 @@ export default {
     stroke: red;
     stroke-dasharray: 2, 3;
     stroke-width: 1.5px;
+  }
+  .line.danger {
+    stroke: red;
+  }
+  text.safeLevel.label {
+    fill: red;
+    font-size: .6em;
+    text-anchor: start;
   }
 }
 </style>
