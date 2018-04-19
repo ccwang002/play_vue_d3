@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="container">
-    <HelloD3 :csvURL='csvURL'></HelloD3>
+    <hello-d3 :csvURL='csvURL'></hello-d3>
     <!-- <D3ScalesAxes :dataset='scalesDataset'></D3ScalesAxes> -->
-    <D3Motions></D3Motions>
-    <D3Motions></D3Motions>
-    <D3Interactivity></D3Interactivity>
-    <D3Paths :csvURL='maunaCSVURL'></D3Paths>
+    <d3-motions></d3-motions>
+    <d3-motions></d3-motions>
+    <d3-interactivity></d3-interactivity>
+    <d3-paths :csvURL='maunaCSVURL'></d3-paths>
     <!-- <img src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"></HelloWorld> -->
   </div>
