@@ -5,6 +5,7 @@
     <D3Motions></D3Motions>
     <D3Motions></D3Motions>
     <D3Interactivity></D3Interactivity>
+    <D3Paths :csvURL='maunaCSVURL'></D3Paths>
     <!-- <img src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"></HelloWorld> -->
   </div>
@@ -17,6 +18,8 @@ import HelloD3 from './components/HelloD3.vue'
 // import D3ScalesAxes from './components/D3ScalesAxes.vue'
 import D3Motions from './components/D3Motions.vue'
 import D3Interactivity from './components/D3Interactivity.vue'
+import maunaCSVURL from './assets/data/mauna_loa_co2_monthly_averages.csv'
+import D3Paths from './components/D3Paths.vue'
 
 // const scalesDataset = [
 //   [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
@@ -30,11 +33,13 @@ export default {
     HelloD3,
     // D3ScalesAxes,
     D3Motions,
-    D3Interactivity
+    D3Interactivity,
+    D3Paths
   },
   data: function () {
     return {
-      csvURL
+      csvURL,
+      maunaCSVURL
       // scalesDataset
     }
   }
