@@ -1,6 +1,6 @@
 ## Playground for Vue.js and D3.js
 Boilerplate by [vue-cli] version 3.0.0-beta.6, which is based on webpack version 3.10.0.
-Webpack 4 will be used in future (there is a `webpack4` WIP branch).
+vue-cli will use webpack 4 in future (there is a `webpack4` WIP branch).
 
 The javascript is written in ES2015 and follows [JavaScript Standard Style].
 Use Bootstrap v4.1 and SCSS for styling.
@@ -19,6 +19,20 @@ Clone the repo and run yarn:
 
 ### Development in VSCode
 Install [vetur] and various extensions by following [vetur's setup][vetur-setup].
+
+VSCode workspace settings:
+
+```json
+{
+    "eslint.autoFixOnSave": false,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        { "language": "vue", "autoFix": true }
+    ],
+    "prettier.eslintIntegration": true,
+}
+```
 
 [vetur]: https://marketplace.visualstudio.com/items?itemName=octref.vetur
 [vetur-setup]: https://vuejs.github.io/vetur/setup.html
