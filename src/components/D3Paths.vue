@@ -117,11 +117,11 @@ export default {
         .attr('x2', this.w - this.padding.x)
         .attr('y1', this.yScale(350))
         .attr('y2', this.yScale(350))
-      
+
       // Label 350ppm line
       svg.append('text')
         .attr('class', 'safeLevel label')
-        .attr('x', this.padding.x + 5)
+        .attr('x', this.padding.x + 15)
         .attr('y', this.yScale(350) - 5)
         .text('350 ppm “safe” level')
     }
