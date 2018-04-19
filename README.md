@@ -5,7 +5,7 @@ Webpack 4 will be used in future (there is a `webpack4` WIP branch).
 The javascript is written in ES2015 and follows [JavaScript Standard Style].
 Use Bootstrap v4.1 and SCSS for styling.
 
-Use D3.js version 5.
+Use D3.js version 5.1.
 
 [vue-cli]: https://github.com/vuejs/vue-cli
 [JavaScript Standard Style]: https://standardjs.com/ 
